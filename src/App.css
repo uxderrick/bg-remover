@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  /* padding: 2rem auto; */
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.image-output {
+  height: 100%;
+  
+}
