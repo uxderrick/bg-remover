@@ -2,9 +2,11 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import axios from "axios";
 
 const Home = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [displayImageSrc, setDisplayImageSrc] = useState("");
   const [fileURL, setFileURL] = useState(
     "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
@@ -14,15 +16,51 @@ const Home = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
+    setFileURL(URL.createObjectURL(file));
 
-    const fileURL = URL.createObjectURL(file);
-    setFileURL(fileURL);
-    // console.log(fileURL);
+    console.log(file);
   };
 
   /////////////////////////////////////
   //API for bg removal
+  const API_URL = "https://api.remove.bg/v1.0/removebg";
+  // const API_URL = "https://sdk.photoroom.com/v1/segment";
 
+  // kiz5fKUj3kGNBbR8G68GD9Rc
+  //4eaab18fd693fc0c64bbb4c07a777c2dfd248175
+  const apiKey = "kiz5fKUj3kGNBbR8G68GD9Rc";
+
+  const removeBackground = async () => {
+    if (!selectedFile) {
+      console.error("No file selected");
+      return;
+    }
+
+    const form = new FormData();
+    form.append("image_file", selectedFile);
+    form.append("size", "preview");
+    form.append("format", "auto");
+
+    const options = {
+      method: "POST",
+      url: API_URL,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+        "x-api-key": apiKey,
+      },
+      data: form,
+    };
+
+    try {
+      const data = await axios.request(options);
+      setDisplayImageSrc(data?.data?.data?.result_b64);
+
+      // console.log(data.data.data.result_b64);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   /////////////////////////////////////
 
   return (
@@ -106,13 +144,17 @@ const Home = () => {
               borderRadius: "10px",
             }}
           >
-            <img
-              src={fileURL}
-              className="image-output"
-              style={{
-                alignItems: "center",
-              }}
-            ></img>
+            {displayImageSrc && (
+              <img
+                src={`data:image/png;base64,${displayImageSrc}`}
+                alt="displayImage"
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -121,6 +163,9 @@ const Home = () => {
         style={{
           marginTop: "20px",
           width: "100px",
+        }}
+        onClick={() => {
+          removeBackground(selectedFile);
         }}
       >
         Generate
