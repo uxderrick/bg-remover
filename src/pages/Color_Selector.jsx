@@ -5,7 +5,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 const Color_Selector = ({ onColorChange }) => {
-  const colors = ["White", "Red", "Orange", "Yellow", "Green", "Cyan"];
+  const colors = ["Gray", "Red", "Orange", "Yellow", "Green", "Cyan"];
   const [selectedColor, setSelectedColor] = useState("White");
 
   const handleColorChange = (e) => {

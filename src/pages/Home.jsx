@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import TheNavbar from "./Navbar";
 import { Flex, Text } from "@radix-ui/themes";
@@ -20,11 +20,40 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
+  const [bgColor, setBgColor] = useState("black");
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
-    console.log(color);
+    // console.log(color);
   };
+
+  useEffect(() => {
+    switch (selectedColor) {
+      case "Color":
+        setBgColor("");
+        break;
+      case "Gray":
+        setBgColor("lightgray");
+        break;
+      case "Red":
+        setBgColor("red");
+        break;
+      case "Orange":
+        setBgColor("orange");
+        break;
+      case "Yellow":
+        setBgColor("yellow");
+        break;
+      case "Green":
+        setBgColor("green");
+        break;
+      case "Cyan":
+        setBgColor("cyan");
+        break;
+      default:
+        setBgColor("white");
+    }
+  }, [selectedColor]);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -269,6 +298,7 @@ const Home = () => {
                     width: "100%",
                     objectFit: "cover",
                     borderRadius: "4px",
+                    backgroundColor: bgColor,
                   }}
                 />
               ) : !isLoading ? (
