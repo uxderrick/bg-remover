@@ -5,9 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import TheNavbar from "./Navbar";
 import { Flex, Text } from "@radix-ui/themes";
-// import Preview from "../assets/Preview.png";
-// import Gradient from "../assets/Gradient.png";
 import Spinner from "react-bootstrap/Spinner";
+import Color_Selector from "./Color_Selector";
 
 const Home = () => {
   document.body.style.backgroundColor = "#000509";
@@ -26,9 +25,6 @@ const Home = () => {
     setSelectedFile(file);
     setFileURL(URL.createObjectURL(file));
     setFileName(file.name);
-
-    // console.log(file);
-    // console.log(file.name);
   };
 
   /////////////////////////////////////
@@ -130,7 +126,7 @@ const Home = () => {
                 background
               </Text>
             }
-            {` of any image`}
+            {` of any image in 3, 2, 1...`}
           </Text>
           <img
             height={"180px"}
@@ -139,6 +135,7 @@ const Home = () => {
             style={{
               position: "absolute",
               top: "280px",
+              zIndex: "1",
             }}
           ></img>
         </Flex>
@@ -240,10 +237,12 @@ const Home = () => {
               flexDirection: "column",
               gap: "8px",
               borderRadius: "8px",
+              position: "relative",
             }}
           >
             <Flex
               className="image-preview"
+              direction={"column"}
               style={{
                 height: "320px",
                 width: "100%",
@@ -297,34 +296,37 @@ const Home = () => {
                   </Text>
                 </Flex>
               ) : (
-                <Spinner animation="grow" variant="secondary" color="red" />
+                <Spinner animation="border" variant="secondary" color="red" />
               )}
             </Flex>
-            <Button
-              className="button"
-              {...(displayImageSrc
-                ? {
-                    variant: "soft",
-                    style: {
-                      width: "100%",
-                      backgroundColor: "#DE12FF",
-                      color: "white",
-                    },
-                  }
-                : {
-                    variant: "soft",
-                    style: {
+            <Flex direction={"row"} gap={"2"}>
+              <Color_Selector />
+              <Button
+                className="button"
+                {...(displayImageSrc
+                  ? {
+                      variant: "soft",
+                      style: {
+                        width: "100%",
+                        backgroundColor: "#DE12FF",
+                        color: "white",
+                      },
+                    }
+                  : {
+                      variant: "soft",
+                      style: {
+                        disabled: true,
+                        width: "100%",
+                        backgroundColor: "#E4E4E9",
+                        color: "white",
+                      },
+                      onClick: () => {},
                       disabled: true,
-                      width: "100%",
-                      backgroundColor: "#E4E4E9",
-                      color: "white",
-                    },
-                    onClick: () => {},
-                    disabled: true,
-                  })}
-            >
-              Download image
-            </Button>
+                    })}
+              >
+                Download image
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
 
