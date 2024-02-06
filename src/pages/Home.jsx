@@ -202,6 +202,7 @@ const Home = () => {
                 }}
               />
               <Button
+                className="button"
                 {...(selectedFile && !isDisabled
                   ? {
                       variant: "soft",
@@ -296,10 +297,11 @@ const Home = () => {
                   </Text>
                 </Flex>
               ) : (
-                <Spinner animation="border" variant="primary" />
+                <Spinner animation="grow" variant="secondary" color="red" />
               )}
             </Flex>
             <Button
+              className="button"
               {...(displayImageSrc
                 ? {
                     variant: "soft",
@@ -341,7 +343,7 @@ const Home = () => {
             mixBlendMode: "luminosity",
             marginTop: "60px",
             backgroundColor: "#0B0B0B",
-            padding: "80px 280px",
+            padding: "80px 200px",
             borderRadius: "120px 120px 0 0",
           }}
         >
