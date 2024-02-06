@@ -6,7 +6,7 @@ import axios from "axios";
 import TheNavbar from "./Navbar";
 import { Flex, Text, colorProp } from "@radix-ui/themes";
 import Preview from "../assets/Preview.png";
-import EmptyImage from "../assets/Empty.png";
+// import EmptyImage from "../assets/Empty.png";
 import Gradient from "../assets/Gradient.png";
 import Spinner from "react-bootstrap/Spinner";
 
@@ -277,7 +277,7 @@ const Home = () => {
                   }}
                 >
                   <img
-                    src={`${EmptyImage}`}
+                    src={`${Preview}`}
                     alt="displayImage"
                     style={{
                       height: "40px",
