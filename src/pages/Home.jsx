@@ -7,6 +7,7 @@ import TheNavbar from "./Navbar";
 import { Flex, Text, colorProp } from "@radix-ui/themes";
 import Preview from "../assets/Preview.png";
 import Empty from "../assets/Empty.png";
+import Gradient from "../assets/Gradient.png";
 
 const Home = () => {
   //set bg color to black
@@ -72,6 +73,19 @@ const Home = () => {
 
   return (
     <>
+      <img
+        height={"1200px"}
+        width={"1200px"}
+        src={Gradient}
+        style={{
+          position: "absolute",
+          zIndex: "-1",
+          left: "50%",
+          transform: "translateX(-50%)",
+          top: "16%",
+          opacity: "0.5",
+        }}
+      ></img>
       <Flex
         gap={"5"}
         align={"center"}
@@ -302,6 +316,7 @@ const Home = () => {
         <Flex
           // direction={"column"}
           // align={"center"}
+          wrap={"wrap"}
           gap={"8"}
           style={{
             width: "100%",
