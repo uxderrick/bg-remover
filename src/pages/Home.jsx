@@ -10,6 +10,7 @@ const Home = () => {
   const [fileURL, setFileURL] = useState(
     "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   );
+  const [fileName, setFileName] = useState("");
 
   //
 
@@ -17,18 +18,21 @@ const Home = () => {
     const file = e.target.files[0];
     setSelectedFile(file);
     setFileURL(URL.createObjectURL(file));
+    setFileName(file.name);
 
     console.log(file);
+    console.log(file.name);
   };
 
   /////////////////////////////////////
   //API for bg removal
-  const API_URL = "https://api.remove.bg/v1.0/removebg";
-  // const API_URL = "https://sdk.photoroom.com/v1/segment";
+  // const API_URL = "https://api.remove.bg/v1.0/removebg";
+  const API_URL = "https://sdk.photoroom.com/v1/segment";
 
   // kiz5fKUj3kGNBbR8G68GD9Rc
   //4eaab18fd693fc0c64bbb4c07a777c2dfd248175
-  const apiKey = "kiz5fKUj3kGNBbR8G68GD9Rc";
+  // const apiKey = "kiz5fKUj3kGNBbR8G68GD9Rc";
+  const apiKey = "4eaab18fd693fc0c64bbb4c07a777c2dfd248175";
 
   const removeBackground = async () => {
     if (!selectedFile) {
@@ -38,29 +42,26 @@ const Home = () => {
 
     const form = new FormData();
     form.append("image_file", selectedFile);
-    form.append("size", "preview");
-    form.append("format", "auto");
 
     const options = {
       method: "POST",
-      url: API_URL,
+      url: "https://sdk.photoroom.com/v1/segment",
       headers: {
-        "Content-Type": "multipart/form-data",
         Accept: "application/json",
-        "x-api-key": apiKey,
+        "x-api-key": "4eaab18fd693fc0c64bbb4c07a777c2dfd248175",
       },
       data: form,
     };
 
     try {
       const data = await axios.request(options);
-      setDisplayImageSrc(data?.data?.data?.result_b64);
-
-      // console.log(data.data.data.result_b64);
+      setDisplayImageSrc(data.data.result_b64);
+      // console.log(data);
     } catch (error) {
       console.error(error);
     }
   };
+
   /////////////////////////////////////
 
   return (
