@@ -20,8 +20,8 @@ const Home = () => {
     setFileURL(URL.createObjectURL(file));
     setFileName(file.name);
 
-    console.log(file);
-    console.log(file.name);
+    // console.log(file);
+    // console.log(file.name);
   };
 
   /////////////////////////////////////
