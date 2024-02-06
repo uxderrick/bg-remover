@@ -19,6 +19,12 @@ const Home = () => {
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [selectedColor, setSelectedColor] = useState("");
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+    console.log(color);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -300,7 +306,11 @@ const Home = () => {
               )}
             </Flex>
             <Flex direction={"row"} gap={"2"}>
-              <Color_Selector />
+              <Color_Selector
+                {...{
+                  onColorChange: handleColorChange,
+                }}
+              />
               <Button
                 className="button"
                 {...(displayImageSrc

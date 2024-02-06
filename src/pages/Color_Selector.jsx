@@ -1,11 +1,18 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { Flex, Text } from "@radix-ui/themes";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
-const Color_Selector = () => {
+const Color_Selector = ({ onColorChange }) => {
   const colors = ["White", "Red", "Orange", "Yellow", "Green", "Cyan"];
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState("White");
+
+  const handleColorChange = (e) => {
+    const color = e.target.value;
+    setSelectedColor(color);
+    onColorChange(color);
+  };
 
   return (
     <>
@@ -18,10 +25,7 @@ const Color_Selector = () => {
         <Form.Select
           aria-label="Default select example"
           defaultValue={"White"}
-          onChange={(e) => {
-            console.log(e.target.value);
-            setSelectedColor(e.target.value);
-          }}
+          onChange={handleColorChange}
         >
           <option>Color</option>
           {colors.map((color) => (
