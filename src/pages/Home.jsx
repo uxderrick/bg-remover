@@ -4,10 +4,9 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import axios from "axios";
 import TheNavbar from "./Navbar";
-import { Flex, Text, colorProp } from "@radix-ui/themes";
-import Preview from "../assets/Preview.png";
-// import EmptyImage from "../assets/Empty.png";
-import Gradient from "../assets/Gradient.png";
+import { Flex, Text } from "@radix-ui/themes";
+// import Preview from "../assets/Preview.png";
+// import Gradient from "../assets/Gradient.png";
 import Spinner from "react-bootstrap/Spinner";
 
 const Home = () => {
@@ -82,7 +81,7 @@ const Home = () => {
       <img
         height={"1200px"}
         width={"1200px"}
-        src={Gradient}
+        src={"https://uxderrick.files.wordpress.com/2024/02/gradient.png"}
         style={{
           position: "absolute",
           zIndex: "-1",
@@ -136,7 +135,7 @@ const Home = () => {
           <img
             height={"180px"}
             width={"180px"}
-            src={Preview}
+            src={"https://uxderrick.files.wordpress.com/2024/02/preview.png"}
             style={{
               position: "absolute",
               top: "280px",
@@ -277,7 +276,9 @@ const Home = () => {
                   }}
                 >
                   <img
-                    src={`${Preview}`}
+                    src={
+                      "https://uxderrick.files.wordpress.com/2024/02/empty.png"
+                    }
                     alt="displayImage"
                     style={{
                       height: "40px",
