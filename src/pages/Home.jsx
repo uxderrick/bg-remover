@@ -20,6 +20,7 @@ const Home = () => {
   );
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -63,6 +64,7 @@ const Home = () => {
     try {
       const data = await axios.request(options);
       setDisplayImageSrc(data.data.result_b64);
+      setIsDisabled(true);
       // console.log(data);
     } catch (error) {
       console.error(error);
@@ -314,8 +316,6 @@ const Home = () => {
         </Flex>
 
         <Flex
-          // direction={"column"}
-          // align={"center"}
           wrap={{
             initial: "wrap",
             xs: "wrap",
