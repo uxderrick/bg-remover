@@ -6,12 +6,11 @@ import axios from "axios";
 import TheNavbar from "./Navbar";
 import { Flex, Text, colorProp } from "@radix-ui/themes";
 import Preview from "../assets/Preview.png";
-import Empty from "../assets/Empty.png";
+import EmptyImage from "../assets/Empty.png";
 import Gradient from "../assets/Gradient.png";
 import Spinner from "react-bootstrap/Spinner";
 
 const Home = () => {
-  //set bg color to black
   document.body.style.backgroundColor = "#000509";
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -278,7 +277,7 @@ const Home = () => {
                   }}
                 >
                   <img
-                    src={`${Empty}`}
+                    src={`${EmptyImage}`}
                     alt="displayImage"
                     style={{
                       height: "40px",
