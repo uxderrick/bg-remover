@@ -8,6 +8,7 @@ import { Flex, Text, colorProp } from "@radix-ui/themes";
 import Preview from "../assets/Preview.png";
 import Empty from "../assets/Empty.png";
 import Gradient from "../assets/Gradient.png";
+import Spinner from "react-bootstrap/Spinner";
 
 const Home = () => {
   //set bg color to black
@@ -48,6 +49,8 @@ const Home = () => {
       return;
     }
 
+    setIsLoading(true);
+
     const form = new FormData();
     form.append("image_file", selectedFile);
 
@@ -65,8 +68,10 @@ const Home = () => {
       const data = await axios.request(options);
       setDisplayImageSrc(data.data.result_b64);
       setIsDisabled(true);
+      setIsLoading(false);
       // console.log(data);
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   };
@@ -191,9 +196,15 @@ const Home = () => {
                 gap: "8px",
               }}
             >
-              <Form.Control type="file" onChange={handleFileChange} />
+              <Form.Control
+                type="file"
+                onChange={handleFileChange}
+                onClick={(e) => {
+                  setIsDisabled(false);
+                }}
+              />
               <Button
-                {...(selectedFile
+                {...(selectedFile && !isDisabled
                   ? {
                       variant: "soft",
                       style: {
@@ -211,8 +222,6 @@ const Home = () => {
                         backgroundColor: "#E4E4E9",
                         color: "white",
                       },
-                      onClick: () => {},
-                      disabled: true,
                     })}
               >
                 Generate
@@ -247,7 +256,7 @@ const Home = () => {
                 borderRadius: "4px",
               }}
             >
-              {displayImageSrc ? (
+              {displayImageSrc && !isLoading ? (
                 <img
                   src={`data:image/png;base64,${displayImageSrc}`}
                   alt="displayImage"
@@ -258,7 +267,7 @@ const Home = () => {
                     borderRadius: "4px",
                   }}
                 />
-              ) : (
+              ) : !isLoading ? (
                 <Flex
                   direction={"column"}
                   align={"center"}
@@ -286,6 +295,8 @@ const Home = () => {
                     {`Your generated image will appear here`}
                   </Text>
                 </Flex>
+              ) : (
+                <Spinner animation="border" variant="primary" />
               )}
             </Flex>
             <Button
