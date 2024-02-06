@@ -316,7 +316,14 @@ const Home = () => {
         <Flex
           // direction={"column"}
           // align={"center"}
-          wrap={"wrap"}
+          wrap={{
+            initial: "wrap",
+            xs: "wrap",
+            sm: "nowrap",
+            md: "nowrap",
+            lg: "nowrap",
+            xl: "nowrap",
+          }}
           gap={"8"}
           style={{
             width: "100%",
