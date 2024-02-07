@@ -8,7 +8,6 @@ import { Flex, Text } from "@radix-ui/themes";
 import Spinner from "react-bootstrap/Spinner";
 import Color_Selector from "./Color_Selector";
 import html2canvas from "html2canvas";
-import Gradient from "../assets/gradient.png";
 
 const Home = () => {
   document.body.style.backgroundColor = "#000509";
@@ -31,7 +30,7 @@ const Home = () => {
       allowTaint: true,
       scale: 5,
       backgroundColor: bgColor,
-      // removeContainer: true,
+      removeContainer: true,
     };
     html2canvas(document.querySelector(".image-preview"), options).then(
       (canvas) => {
