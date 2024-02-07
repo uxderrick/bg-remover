@@ -7,6 +7,8 @@ import TheNavbar from "./Navbar";
 import { Flex, Text } from "@radix-ui/themes";
 import Spinner from "react-bootstrap/Spinner";
 import Color_Selector from "./Color_Selector";
+import html2canvas from "html2canvas";
+import Gradient from "../assets/gradient.png";
 
 const Home = () => {
   document.body.style.backgroundColor = "#000509";
@@ -22,6 +24,25 @@ const Home = () => {
   const [selectedColor, setSelectedColor] = useState("");
   const [bgColor, setBgColor] = useState("black");
 
+  const downloadImage = () => {
+    const options = {
+      logging: true,
+      useCORS: true,
+      allowTaint: true,
+      scale: 5,
+      backgroundColor: bgColor,
+      removeContainer: true,
+    };
+    html2canvas(document.querySelector(".image-preview"), options).then(
+      (canvas) => {
+        const link = document.createElement("a");
+        link.download = "image.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
+    );
+  };
+
   const handleColorChange = (color) => {
     setSelectedColor(color);
     // console.log(color);
@@ -30,7 +51,7 @@ const Home = () => {
   useEffect(() => {
     switch (selectedColor) {
       case "Color":
-        setBgColor("");
+        setBgColor("transparent");
         break;
       case "Gray":
         setBgColor("lightgray");
@@ -109,21 +130,38 @@ const Home = () => {
 
   return (
     <>
-      <img
-        height={"1200px"}
-        width={"1200px"}
-        src={"https://uxderrick.files.wordpress.com/2024/02/gradient.png"}
+      {/* <img
+        src={Gradient}
         style={{
+          // zIndex: "-1",
+          position: "absolute",
+        }}
+      ></img> */}
+      <Flex
+        style={{
+          // width: "1200px",
+          height: "100%",
           position: "absolute",
           zIndex: "-1",
+          top: "20%",
           left: "50%",
           transform: "translateX(-50%)",
-          top: "16%",
-          opacity: "0.5",
         }}
-      ></img>
+      >
+        {/* <img
+          src={Gradient}
+          style={
+            {
+              // position: "absolute",
+              // width: "100%",
+              // height: "100%",
+              // objectFit: "cover",
+            }
+          }
+        ></img> */}
+      </Flex>
       <Flex
-        gap={"5"}
+        // gap={"5"}
         align={"center"}
         direction={"column"}
         style={{
@@ -168,8 +206,8 @@ const Home = () => {
             width={"180px"}
             src={"https://uxderrick.files.wordpress.com/2024/02/preview.png"}
             style={{
-              position: "absolute",
-              top: "280px",
+              position: "relative",
+              top: "60px",
               zIndex: "1",
             }}
           ></img>
@@ -182,7 +220,7 @@ const Home = () => {
             gap: "16px",
             width: "100%",
             height: "100%",
-            marginTop: "60px",
+            // marginTop: "60px",
           }}
           wrap={"wrap"}
         >
@@ -202,7 +240,7 @@ const Home = () => {
             }}
           >
             <Flex
-              className="image-preview"
+              // className="image-preview"
               style={{
                 height: "320px",
                 width: "100%",
@@ -281,23 +319,25 @@ const Home = () => {
               style={{
                 height: "320px",
                 width: "100%",
-                backgroundColor: "white",
+                backgroundColor: bgColor,
                 textAlign: "center",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: "4px",
+                clipPath: "inset(0px 0px 0px 0px round 4px)",
               }}
             >
               {displayImageSrc && !isLoading ? (
                 <img
+                  id="image-preview"
                   src={`data:image/png;base64,${displayImageSrc}`}
                   alt="displayImage"
                   style={{
-                    height: "100%",
+                    // height: "100%",
                     width: "100%",
                     objectFit: "cover",
-                    borderRadius: "4px",
+                    // borderRadius: "4px",
                     backgroundColor: bgColor,
                   }}
                 />
@@ -332,7 +372,7 @@ const Home = () => {
                   </Text>
                 </Flex>
               ) : (
-                <Spinner animation="border" variant="secondary" color="red" />
+                <Spinner animation="border" variant="secondary" />
               )}
             </Flex>
             <Flex direction={"row"} gap={"2"}>
@@ -351,6 +391,7 @@ const Home = () => {
                         backgroundColor: "#DE12FF",
                         color: "white",
                       },
+                      onClick: downloadImage,
                     }
                   : {
                       variant: "soft",
@@ -360,98 +401,12 @@ const Home = () => {
                         backgroundColor: "#E4E4E9",
                         color: "white",
                       },
-                      onClick: () => {},
                       disabled: true,
                     })}
               >
                 Download image
               </Button>
             </Flex>
-          </Flex>
-        </Flex>
-
-        <Flex
-          wrap={{
-            initial: "wrap",
-            xs: "wrap",
-            sm: "nowrap",
-            md: "nowrap",
-            lg: "nowrap",
-            xl: "nowrap",
-          }}
-          gap={"8"}
-          style={{
-            width: "100%",
-            mixBlendMode: "luminosity",
-            marginTop: "60px",
-            backgroundColor: "#0B0B0B",
-            padding: "80px 200px",
-            borderRadius: "120px 120px 0 0",
-          }}
-        >
-          <Flex
-            direction={"column"}
-            align={"center"}
-            gap={"3"}
-            style={{
-              display: "flex",
-              gap: "8px",
-              width: "100%",
-            }}
-          >
-            <img
-              src={
-                "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="displayImage"
-              style={{
-                height: "60px",
-                width: "60px",
-                objectFit: "cover",
-                borderRadius: "16px",
-              }}
-            />
-            <Text
-              size={"3"}
-              align={"center"}
-              style={{
-                color: "#8B8D98",
-              }}
-            >
-              {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in nisi id justo aliquam aliquet. Donec id justo aliquam aliquet. Donec id justo aliquam aliquet.`}
-            </Text>
-          </Flex>
-          <Flex
-            align={"center"}
-            direction={"column"}
-            gap={"3"}
-            style={{
-              display: "flex",
-              gap: "8px",
-              width: "100%",
-            }}
-          >
-            <img
-              src={
-                "https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="displayImage"
-              style={{
-                height: "60px",
-                width: "60px",
-                objectFit: "cover",
-                borderRadius: "16px",
-              }}
-            />
-            <Text
-              size={"3"}
-              align={"center"}
-              style={{
-                color: "#8B8D98",
-              }}
-            >
-              {`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in nisi id justo aliquam aliquet. Donec id justo aliquam aliquet. Donec id justo aliquam aliquet.`}
-            </Text>
           </Flex>
         </Flex>
       </Flex>

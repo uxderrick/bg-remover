@@ -4,6 +4,10 @@ import Navbar from "react-bootstrap/Navbar";
 import { Flex, Text, Button } from "@radix-ui/themes";
 
 const TheNavbar = () => {
+  const reload = () => {
+    window.location.reload();
+  };
+
   return (
     <>
       <Navbar fixed="top" variant="dark">
@@ -11,12 +15,13 @@ const TheNavbar = () => {
           style={{
             padding: "2rem",
             height: "80px",
+            width: "100%",
             backgroundColor: "#1D1E23",
             borderRadius: "999px",
             border: "1px solid #1F1F21",
           }}
         >
-          <Navbar.Brand href="#home">
+          <Navbar.Brand onClick={reload} className="mouse">
             <Flex gap={"2"} align={"center"}>
               <img
                 src="https://s3-alpha-sig.figma.com/img/09a8/66c2/de9fdf8821a80d0b862c9df74ef4f0b1?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=faiZB5f1asBGrXtcSlVQ1tbo5ZfNAPPb3A2A2sRf5di6W~gc-zEozX32R1NUUGwh0R7zB38QnRpATWdifsWrmXV~zgZ8exYTZUSXovWvAevCzb3NAGumQaaNBPrDFwKtOAstc14mEX61BSlKb6Z4i16e8GPnHZwnEB~yYIdTt1PTWuKtnUQUhFJkZLnhLgppuNipvMbCxwmOJxkJye53ZY8T0RINSsIX0b0~842j2YYjE6eohMhds1Qvzk-eWL44YCVxCyTJISXX52W~z2USJODtyx13m5EaBO8ESFZjHZ~gXxZX5vOVND1eIEnr4M0Xp1U9jwx~EdwKu8Y5EEwW1Q__"

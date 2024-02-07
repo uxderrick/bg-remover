@@ -5,12 +5,12 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  /* width: auto; */
 }
 
 body {
-  height: 100%;
+  height: 100vh;
 }
 
 .image-output {
@@ -21,4 +21,8 @@ body {
   &:hover {
     filter: brightness(0.8);
   }
+}
+
+.mouse {
+  cursor: pointer;
 }
