@@ -31,7 +31,7 @@ const Home = () => {
       allowTaint: true,
       scale: 5,
       backgroundColor: bgColor,
-      removeContainer: true,
+      // removeContainer: true,
     };
     html2canvas(document.querySelector(".image-preview"), options).then(
       (canvas) => {
